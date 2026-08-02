@@ -4,14 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/api1")
-public class WelcomeController {
+@RequestMapping("/api2")
+public class WelcomeController2 {
 
 	
 	@RequestMapping("/")
 	public String hello()
 	{
-		System.out.println("WelcomeController.hello()");
+		System.out.println("WelcomeController2.hello()");
 		return "index11.jsp";
 	}
 	
@@ -19,14 +19,14 @@ public class WelcomeController {
 	@RequestMapping("/welcome")
 	public String greet()
 	{
-		System.out.println("WelcomeController.greet()");
+		System.out.println("WelcomeController2.greet()");
 		return "welcome.jsp";
 	}
 	
 	@RequestMapping("/admin")
 	public String adminLogIn()
 	{
-		System.out.println("WelcomeController.adminLogIn()");
+		System.out.println("WelcomeController2.adminLogIn()");
 		return "redirect:/welcome";
 	}
 	
