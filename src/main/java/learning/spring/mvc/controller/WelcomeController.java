@@ -12,7 +12,7 @@ public class WelcomeController {
 	public String hello()
 	{
 		System.out.println("WelcomeController.hello()");
-		return "index11.jsp";
+		return "index11";
 	}
 	
 
@@ -20,7 +20,7 @@ public class WelcomeController {
 	public String greet()
 	{
 		System.out.println("WelcomeController.greet()");
-		return "welcome.jsp";
+		return "welcome";
 	}
 	
 	@RequestMapping("/admin")

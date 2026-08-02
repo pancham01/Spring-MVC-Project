@@ -1,6 +1,7 @@
 package learning.spring.mvc.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -8,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class WelcomeController2 {
 
 	
-	@RequestMapping("/")
+	@GetMapping("/")
 	public String hello()
 	{
 		System.out.println("WelcomeController2.hello()");
-		return "index11.jsp";
+		return "index11";
 	}
 	
 
@@ -20,7 +21,7 @@ public class WelcomeController2 {
 	public String greet()
 	{
 		System.out.println("WelcomeController2.greet()");
-		return "welcome.jsp";
+		return "welcome";
 	}
 	
 	@RequestMapping("/admin")
