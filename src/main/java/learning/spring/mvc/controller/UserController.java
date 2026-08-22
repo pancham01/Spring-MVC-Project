@@ -1,5 +1,6 @@
 package learning.spring.mvc.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,9 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpServletRequest;
 import learning.spring.mvc.model.User;
+import learning.spring.mvc.service.UserService;
 
 @Controller
 public class UserController {
+
+	@Autowired
+	private UserService userService;
 
 	@GetMapping("/signup")
 	public String showSignupForm(Model model) {
@@ -21,68 +26,32 @@ public class UserController {
 		return "signup";
 	}
 
+	@GetMapping("/login")
+	public String showLogInForm(Model model) {
+		System.out.println("UserController.showLogInForm()");
+		return "login";
+	}
+
+	@PostMapping("/login")
+	public String registerUserByRequestParam(@RequestParam("username") String username,
+			@RequestParam("password") String password,Model model) {
+
+		System.out.println("UserController.registerUserByRequestParam()");
+		User validateUser = userService.validateUser(username, password);
+		model.addAttribute("user", validateUser);
+		if (validateUser != null) {
+			return "profile";
+		} else {
+			return "error";
+		}
+	}
+
 	@PostMapping("/signup")
-	public String registerUserByRequestParam(HttpServletRequest request) {
-		
-		
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		String age = request.getParameter("age");
-		String gender = request.getParameter("gender");
-		String email = request.getParameter("email");
-		String address = request.getParameter("address");
+	public String registerUserByModelAttribute(@ModelAttribute("user") User user) {
 
-		User user = new User();
-		user.setUsername(username);
-		user.setGender(gender);
-		user.setAge(Integer.parseInt(age));
-		user.setPassword(password);
-		user.setEmail(email);
-		user.setAddress(address);
-
+		userService.addUser(user);
 		System.out.println(user);
-
-		System.out.println("Name is: " + username);
-		System.out.println("Password is: " + password);
-		System.out.println("Age is: " + age);
-		System.out.println("Gender is: " + gender);
-		System.out.println("email is: " + email);
-		System.out.println("Address is: " + address);
 
 		return "admin";
 	}
-
-//	@PostMapping("/signup")
-//	public String registerUserByRequestParam(@RequestParam("username") String username,
-//			@RequestParam("password") String password, @RequestParam("gender") String gender,
-//			@RequestParam("age") int age, @RequestParam("email") String email,
-//			@RequestParam("address") String address) {
-//
-//		User user = new User();
-//		user.setUsername(username);
-//		user.setGender(gender);
-//		user.setAge(age);
-//		user.setPassword(password);
-//		user.setEmail(email);
-//		user.setAddress(address);
-//		
-//		System.out.println(user);
-//
-//		System.out.println("Name is: " + username);
-//		System.out.println("Password is: " + password);
-//		System.out.println("Age is: " + age);
-//		System.out.println("Gender is: " + gender);
-//		System.out.println("email is: " + email);
-//		System.out.println("Address is: " + address);
-//
-//		return "admin";
-//	}
-
-//	@PostMapping("/signup")
-//	public String registerUserByModelAttribute(@ModelAttribute("user") User user) {
-//
-//		System.out.println(user);
-//		
-//		return "admin";
-//	}
 }
