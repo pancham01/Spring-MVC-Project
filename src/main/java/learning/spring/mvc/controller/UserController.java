@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpServletRequest;
 import learning.spring.mvc.model.User;
@@ -33,16 +34,18 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
-	public String registerUserByRequestParam(@RequestParam("username") String username,
-			@RequestParam("password") String password,Model model) {
+	@ResponseBody
+	public User loginUser(@RequestParam("username") String username, @RequestParam("password") String password,
+			Model model) {
 
 		System.out.println("UserController.registerUserByRequestParam()");
 		User validateUser = userService.validateUser(username, password);
+		System.out.println(validateUser);
 		model.addAttribute("user", validateUser);
 		if (validateUser != null) {
-			return "profile";
+			return validateUser;
 		} else {
-			return "error";
+			return null;
 		}
 	}
 
