@@ -2,12 +2,25 @@ package learning.spring.mvc.model;
 
 public class User {
 
+	
+	private int id;
 	private String username;
 	private String password;
 	private String gender;
 	private int age;
 	private String address;
 	private String email;
+	
+	
+	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getUsername() {
 		return username;
@@ -59,10 +72,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", password=" + password + ", gender=" + gender + ", age=" + age
-				+ ", address=" + address + ", email=" + email + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", gender=" + gender + ", age="
+				+ age + ", address=" + address + ", email=" + email + "]";
 	}
-	
-	
 	
 }
